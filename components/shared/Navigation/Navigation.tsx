@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import { getSearchSuggestions } from "@/apis";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import useDebounce from "@/hooks/useDebounce";
 import { SearchSuggestion } from "@/types/search";
 import SearchResults from "./SearchResults";
+import Logo from "../../Logo";
+import Navbar from "./Navbar";
 
 const Navigation = () => {
   const [search, setSearch] = useState<string>("");
@@ -30,7 +32,10 @@ const Navigation = () => {
 
   return (
     <div className="flex items-center justify-between px-5 py-4">
-      <div>logo</div>
+      <div className="flex flex-row items-center gap-10">
+        <Logo />
+        <Navbar />
+      </div>
       <div className="w-1/4 flex items-center gap-4 relative">
         <ThemeToggle />
         <Input
