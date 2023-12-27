@@ -8,11 +8,13 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav>
-      <ul className="flex items-center gap-8">
+    <nav className="">
+      <ul className="flex flex-col lg:flex-row items-start lg:items-center gap-5">
         {NavbarLinks.map((link) => (
           <li
-            className={`navbar-link ${pathname == link.path && "active"} `}
+            className={`navbar-link ${
+              pathname == link.path && "active"
+            } text-nowrap`}
             key={link.path}
           >
             <Link href={link.path}>
