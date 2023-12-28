@@ -4,6 +4,7 @@ import ComicCard from "./ComicCard";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import SkeletonComicCard from "./SkeletonComicCard";
+import { Skeleton } from "../ui/skeleton";
 
 interface ComicListProps {
   name: string;
@@ -19,28 +20,35 @@ const ComicList: React.FC<ComicListProps> = ({
   loading,
 }) => {
   return (
-    <section>
-      <div className="flex items-center justify-between mb-8">
-        <h3 className="text-3xl font-bold text-green-500">{name}</h3>
-        <Link className={buttonVariants({ variant: "outline" })} href={url}>
-          Xem thêm
-        </Link>
-      </div>
-
+    <>
       {loading ? (
-        <div className="grid grid-cols-5 gap-5">
-          {Array.from(Array(10).keys()).map((index) => (
-            <SkeletonComicCard key={index} />
-          ))}
-        </div>
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-8">
+            <Skeleton className="w-1/5 h-10" />
+            <Skeleton className="w-[100px] h-10" />
+          </div>
+          <div className="grid grid-cols-5 gap-5">
+            {Array.from(Array(10).keys()).map((index) => (
+              <SkeletonComicCard key={index} />
+            ))}
+          </div>
+        </section>
       ) : (
-        <div className="grid grid-cols-5 gap-5">
-          {comicData.slice(0, 10).map((comic: Comic) => {
-            return <ComicCard key={comic.id} comic={comic} />;
-          })}
-        </div>
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-8">
+            <h3 className="text-3xl font-bold text-green-500">{name}</h3>
+            <Link className={buttonVariants({ variant: "outline" })} href={url}>
+              Xem thêm
+            </Link>
+          </div>
+          <div className="grid grid-cols-5 gap-5">
+            {comicData.slice(0, 10).map((comic: Comic) => {
+              return <ComicCard key={comic.id} comic={comic} />;
+            })}
+          </div>
+        </section>
       )}
-    </section>
+    </>
   );
 };
 
