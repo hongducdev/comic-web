@@ -9,9 +9,9 @@ const Navbar = () => {
 
   return (
     <nav className="">
-      <ul className="flex flex-col lg:flex-row items-start lg:items-center gap-5">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5">
         {NavbarLinks.map((link) => (
-          <li
+          <div
             className={`navbar-link ${
               pathname == link.path && "active"
             } text-nowrap`}
@@ -20,9 +20,9 @@ const Navbar = () => {
             <Link href={link.path}>
               <span className="">{link.label}</span>
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </nav>
   );
 };

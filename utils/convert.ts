@@ -4,6 +4,10 @@ export const status = [
     label: "Đang cập nhật",
   },
   {
+    value: "Ongoing",
+    label: "Đang câp nhật",
+  },
+  {
     value: "Completed",
     label: "Đã hoàn thành",
   },
@@ -12,3 +16,11 @@ export const status = [
     label: "Đã hủy",
   },
 ];
+
+export const formatNumber = (number: number) => {
+  const formatter = Intl.NumberFormat("vi-VN", {
+    notation: "compact",
+  });
+
+  return formatter.format(number);
+};

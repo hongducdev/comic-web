@@ -7,3 +7,9 @@ export const getSearchSuggestions = async (query: string) => {
 
   return response.data;
 };
+
+export const getTrending = async (page: number) => {
+  const response = await axios.get(`${baseUrl}/trending-comics/?page=${page}`);
+
+  return response.data;
+};
