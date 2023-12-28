@@ -31,7 +31,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   }, [onClose]);
   return (
     <>
-      <div className="absolute w-full lg:w-1/3 top-full right-0 lg:right-5 mt-2 lg:mt-0 z-30" ref={containerRef}>
+      <div
+        className="absolute w-full lg:w-1/3 top-full right-0 lg:right-5 mt-2 lg:mt-0 z-30"
+        ref={containerRef}
+      >
         {searchData.length > 0 ? (
           <ul className="bg-white dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 rounded-md w-full max-h-[200px] lg:max-h-[300px] overflow-y-auto">
             {searchData.map((result) => (
@@ -50,7 +53,9 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                       <span className="text-base lg:text-lg font-semibold text-gray-900 dark:text-gray-100">
                         {result.title}
                       </span>
-                      <span className="text-green-500">{result.lastest_chapter}</span>
+                      <span className="text-emerald-500">
+                        {result.lastest_chapter}
+                      </span>
                       <div className="">
                         {result.genres.map((genre) => genre).join(", ")}
                       </div>

@@ -13,12 +13,12 @@ export interface Comic {
   last_chapter: Chapter;
 }
 
-interface Genre {
+export interface Genre {
   id: string;
   name: string;
 }
 
-interface Chapter {
+export interface Chapter {
   id: number;
   name: string;
 }

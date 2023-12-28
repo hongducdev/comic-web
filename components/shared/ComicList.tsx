@@ -36,7 +36,7 @@ const ComicList: React.FC<ComicListProps> = ({
       ) : (
         <section className="mb-8">
           <div className="flex items-center justify-between mb-8">
-            <h3 className="text-3xl font-bold text-green-500">{name}</h3>
+            <h3 className="text-3xl font-bold text-emerald-500">{name}</h3>
             <Link className={buttonVariants({ variant: "outline" })} href={url}>
               Xem thêm
             </Link>
