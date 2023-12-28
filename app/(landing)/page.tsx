@@ -50,7 +50,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <section className="max-w-[1280px] mx-auto">
+    <section className="">
       <ComicList
         name="Đang phổ biến"
         url="/trending-comics"
