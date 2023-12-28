@@ -8,8 +8,58 @@ export const getSearchSuggestions = async (query: string) => {
   return response.data;
 };
 
-export const getTrending = async (page: number) => {
-  const response = await axios.get(`${baseUrl}/trending-comics/?page=${page}`);
+export const getRecommended = async () => {
+  const response = await axios.get(`${baseUrl}/recommended-comics`);
 
   return response.data;
 };
+
+export const getRecentUpdates = async (
+  page: number,
+  status: "all" | "ongoing" | "completed"
+) => {
+  const response = await axios.get(
+    `${baseUrl}/recent-update-comics?page=${page}&status=${status}`
+  );
+
+  return response.data;
+};
+
+export const getListComic = async (
+  type: "trending-comics" | "boy-comics" | "girl-comics" | "completed-comics",
+  page: number
+) => {
+  const response = await axios.get(`${baseUrl}/${type}?page=${page}`);
+
+  return response.data;
+};
+
+export const getTop = async (
+  type: "daily" | "weekly" | "monthly" | "chapter" | "follow",
+  page: number,
+  status: "all" | "ongoing" | "completed"
+) => {
+  const response = await axios.get(
+    `${baseUrl}/top/${type}&page=${page}&status=${status}`
+  );
+
+  return response.data;
+};
+
+export const getDetailComic = async (comic_id:string) => {
+  const response = await axios.get(`${baseUrl}/comics/${comic_id}`);
+
+  return response.data;
+}
+
+export const getComicChapter = async (comic_id:string) => {
+  const response = await axios.get(`${baseUrl}/comics/${comic_id}/chapters`);
+
+  return response.data;
+}
+
+export const getChapterDetail = async (comic_id:string, chapter_id:string) => {
+  const response = await axios.get(`${baseUrl}/comics/${comic_id}/chapters/${chapter_id}`);
+
+  return response.data;
+}

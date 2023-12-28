@@ -1,5 +1,5 @@
 "use client";
-import { getTrending } from "@/apis";
+import { getListComic } from "@/apis";
 import ComicList from "@/components/shared/ComicList";
 import { Comic } from "@/types/comic";
 import React, { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ const HomePage = () => {
   useEffect(() => {
     setIsLoading(true);
     const getPopularComics = async () => {
-      const response = await getTrending(1);
+      const response = await getListComic("trending-comics", 1);
       setIsLoading(false);
       setPopularComics(response.comics);
     };
