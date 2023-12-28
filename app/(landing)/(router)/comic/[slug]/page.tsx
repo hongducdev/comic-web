@@ -32,7 +32,7 @@ export const generateMetadata = async ({
   };
 };
 
-export const getComic = async ({ params }: Props) => {
+const getComic = async ({ params }: Props) => {
   const comic_id = params.slug;
   const comic = await getDetailComic(comic_id);
   return comic;
