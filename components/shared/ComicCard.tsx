@@ -38,7 +38,10 @@ const ComicCard: React.FC<ComicCardProps> = ({ comic }) => {
               <span className="">
                 {status.find((item) => item.value === comic.status)?.label}
               </span>
-              •<span className="">{comic.last_chapter.name}</span>
+              <span className="hidden lg:block">
+                {" "}
+                • {comic.last_chapter.name}
+              </span>
             </div>
           </div>
           <h3 className="line-clamp-2 font-semibold mt-2 group-hover:text-emerald-500">

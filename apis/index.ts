@@ -58,7 +58,7 @@ export const getComicChapter = async (comic_id:string) => {
   return response.data;
 }
 
-export const getChapterDetail = async (comic_id:string, chapter_id:string) => {
+export const getChapterDetail = async (comic_id:string, chapter_id:number) => {
   const response = await axios.get(`${baseUrl}/comics/${comic_id}/chapters/${chapter_id}`);
 
   return response.data;
