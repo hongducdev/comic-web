@@ -34,8 +34,11 @@ export const generateMetadata = async ({
 
 const getComic = async ({ params }: Props) => {
   const comic_id = params.slug;
-  const comic = await getDetailComic(comic_id);
-  return comic;
+  const response = await getDetailComic(comic_id);
+  if (response.status === 500) {
+    
+  }
+  return response;
 };
 
 const DetailComicPage = async ({ params }: Props) => {
@@ -95,7 +98,10 @@ const DetailComicPage = async ({ params }: Props) => {
           Danh sách chương
         </h2>
         <div className="">
-          <ChapterList comicId={comicData.id} chapterList={comicData.chapters} />
+          <ChapterList
+            comicId={comicData.id}
+            chapterList={comicData.chapters}
+          />
         </div>
       </div>
     </section>

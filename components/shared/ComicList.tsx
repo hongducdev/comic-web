@@ -41,11 +41,15 @@ const ComicList: React.FC<ComicListProps> = ({
               Xem thêm
             </Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 lg:gap-5">
-            {comicData.slice(0, 10).map((comic: Comic) => {
-              return <ComicCard key={comic.id} comic={comic} />;
-            })}
-          </div>
+          {!loading && comicData.length > 0 ? (
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 lg:gap-5">
+              {comicData.slice(0, 10).map((comic: Comic) => {
+                return <ComicCard key={comic.id} comic={comic} />;
+              })}
+            </div>
+          ) : (
+            <p className="text-gray-400">Không có dữ liệu</p>
+          )}
         </section>
       )}
     </>
