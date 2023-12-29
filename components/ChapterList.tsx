@@ -28,7 +28,7 @@ const ChapterList: React.FC<ChapterListProps> = ({ chapterList }) => {
     (_, index) => (
       <button
         key={index}
-        className={`px-2 py-0.5 rounded-full ${
+        className={`px-2 py-0.5 rounded-full text-sm ${
           index === selectedRange
             ? "bg-emerald-100 text-emerald-500 dark:bg-emerald-800 dark:text-emerald-400"
             : "bg-neutral-100 dark:bg-neutral-800"
@@ -43,7 +43,7 @@ const ChapterList: React.FC<ChapterListProps> = ({ chapterList }) => {
   return (
     <div>
       <div className="my-3 flex flex-wrap gap-2">{rangeButtons}</div>
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {chapterListShow.map((chapter) => (
           <Link
             href={`/chapter/${chapter.id}`}
