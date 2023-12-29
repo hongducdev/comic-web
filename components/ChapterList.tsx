@@ -4,10 +4,11 @@ import { Chapter } from "@/types/comic";
 import Link from "next/link";
 
 interface ChapterListProps {
+  comicId: string;
   chapterList: Chapter[];
 }
 
-const ChapterList: React.FC<ChapterListProps> = ({ chapterList }) => {
+const ChapterList: React.FC<ChapterListProps> = ({ comicId, chapterList }) => {
   const [chapterListShow, setChapterListShow] = useState<Chapter[]>([]);
   const [selectedRange, setSelectedRange] = useState(0);
 
@@ -46,7 +47,7 @@ const ChapterList: React.FC<ChapterListProps> = ({ chapterList }) => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {chapterListShow.map((chapter) => (
           <Link
-            href={`/chapter/${chapter.id}`}
+            href={`/comic/${comicId}/${chapter.id}`}
             key={chapter.id}
             className="border border-gray-300 dark:border-gray-700 rounded-md p-3 hover:bg-emerald-100 dark:hover:bg-emerald-700 hover:border-emerald-400 transition-colors"
           >

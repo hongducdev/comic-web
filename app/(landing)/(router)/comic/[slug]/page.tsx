@@ -95,7 +95,7 @@ const DetailComicPage = async ({ params }: Props) => {
           Danh sách chương
         </h2>
         <div className="">
-          <ChapterList chapterList={comicData.chapters} />
+          <ChapterList comicId={comicData.id} chapterList={comicData.chapters} />
         </div>
       </div>
     </section>

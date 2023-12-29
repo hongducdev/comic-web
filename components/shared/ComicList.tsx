@@ -27,7 +27,7 @@ const ComicList: React.FC<ComicListProps> = ({
             <Skeleton className="w-1/5 h-10" />
             <Skeleton className="w-[100px] h-10" />
           </div>
-          <div className="grid grid-cols-5 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 lg:gap-5">
             {Array.from(Array(10).keys()).map((index) => (
               <SkeletonComicCard key={index} />
             ))}
@@ -41,7 +41,7 @@ const ComicList: React.FC<ComicListProps> = ({
               Xem thêm
             </Link>
           </div>
-          <div className="grid grid-cols-5 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 lg:gap-5">
             {comicData.slice(0, 10).map((comic: Comic) => {
               return <ComicCard key={comic.id} comic={comic} />;
             })}
