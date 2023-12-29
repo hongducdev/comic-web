@@ -44,8 +44,8 @@ const DetailComicPage = async ({ params }: Props) => {
 
   return (
     <section>
-      <div className="flex items-center gap-10">
-        <div className="relative w-1/5 h-[400px]">
+      <div className="flex flex-col lg:flex-row items-center gap-10">
+        <div className="relative w-4/5 lg:w-1/5 h-[400px]">
           <FallbackImage
             src={comicData.thumbnail}
             alt={comicData.title}
@@ -53,7 +53,7 @@ const DetailComicPage = async ({ params }: Props) => {
             className="w-full h-full rounded-md object-cover"
           />
         </div>
-        <div className="flex flex-col gap-3 w-3/5">
+        <div className="flex flex-col gap-3 w-full lg:w-3/5">
           <h1 className="text-4xl font-bold">{comicData.title}</h1>
           <div className="flex flex-wrap items-center gap-3">
             {comicData.genres.map((genre: Genre) => (

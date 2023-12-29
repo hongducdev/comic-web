@@ -9,7 +9,7 @@ const LandingLayout: React.FC<LandingLayoutProps> = ({ children }) => {
   return (
     <div>
       <Navigation />
-      <div className="max-w-[1280px] mx-auto">{children}</div>
+      <div className="max-w-[1280px] mx-auto px-3 lg:px-0">{children}</div>
     </div>
   );
 };
