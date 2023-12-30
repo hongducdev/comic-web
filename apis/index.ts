@@ -46,20 +46,43 @@ export const getTop = async (
   return response.data;
 };
 
-export const getDetailComic = async (comic_id:string) => {
+export const getDetailComic = async (comic_id: string) => {
   const response = await axios.get(`${baseUrl}/comics/${comic_id}`);
 
   return response.data;
-}
+};
 
-export const getComicChapter = async (comic_id:string) => {
+export const getComicChapter = async (comic_id: string) => {
   const response = await axios.get(`${baseUrl}/comics/${comic_id}/chapters`);
 
   return response.data;
-}
+};
 
-export const getChapterDetail = async (comic_id:string, chapter_id:number) => {
-  const response = await axios.get(`${baseUrl}/comics/${comic_id}/chapters/${chapter_id}`);
+export const getChapterDetail = async (
+  comic_id: string,
+  chapter_id: number
+) => {
+  const response = await axios.get(
+    `${baseUrl}/comics/${comic_id}/chapters/${chapter_id}`
+  );
 
   return response.data;
-}
+};
+
+export const getGenres = async () => {
+  const response = await axios.get(`${baseUrl}/genres`);
+
+  return response.data;
+};
+
+export const getComicByGenre = async (
+  genre_id: string,
+  page: number,
+  status: "all" | "ongoing" | "completed"
+) => {
+  const response = await axios.get(
+    `${baseUrl}/genres/${genre_id}?page=${page}&status=${status}`
+  );
+
+  return response.data;
+};
