@@ -3,7 +3,7 @@ export interface Comic {
   title: string;
   thumbnail: string;
   updatedAt: string;
-  isTrending: boolean;
+  is_trending: boolean;
   genres: Genre[];
   short_description: string;
   other_names: string[];
@@ -16,6 +16,7 @@ export interface Comic {
 export interface Genre {
   id: string;
   name: string;
+  description?: string;
 }
 
 export interface Chapter {
