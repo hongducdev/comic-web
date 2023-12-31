@@ -4,7 +4,7 @@ import ComicListWithoutTitle from "@/components/shared/ComicListWithoutTitle";
 import PaginationComics from "@/components/shared/PaginationComics";
 import { Comic } from "@/types/comic";
 import { categoryList } from "@/utils/category";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface CategoryPageProps {
@@ -15,6 +15,7 @@ interface CategoryPageProps {
 
 const CategoryPage = () => {
   const { slug } = useParams();
+  const router = useRouter();
   const [comics, setComics] = useState<CategoryPageProps>({
     comics: [],
     total_pages: 1,
@@ -22,6 +23,13 @@ const CategoryPage = () => {
   });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // kiểm tra slug có hợp lệ hay không nêu không thì trả về trang 404
+  useEffect(() => {
+    if (slug && !categoryList.find((category) => category.id === slug)) {
+      router.push("/404");
+    }
+  }, [slug, router]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,7 +50,7 @@ const CategoryPage = () => {
         setIsLoading(false);
       }
     };
-    
+    fetchComics();
   }, [slug, currentPage]);
 
   return (
@@ -52,10 +60,7 @@ const CategoryPage = () => {
           "Không tìm thấy trang"}
       </h1>
       <div className="mt-5">
-        <ComicListWithoutTitle
-          comicData={comics.comics}
-          loading={isLoading}
-        />
+        <ComicListWithoutTitle comicData={comics.comics} loading={isLoading} />
       </div>
       <div className="my-3">
         <PaginationComics
