@@ -25,6 +25,17 @@ export const getRecentUpdates = async (
   return response.data;
 };
 
+export const getNewComics = async (
+  page: number,
+  status: "all" | "ongoing" | "completed"
+) => {
+  const response = await axios.get(
+    `${baseUrl}/new-comics?page=${page}&status=${status}`
+  );
+
+  return response.data;
+}
+
 export const getListComic = async (
   type: "trending-comics" | "boy-comics" | "girl-comics" | "completed-comics",
   page: number
