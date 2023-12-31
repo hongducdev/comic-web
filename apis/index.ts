@@ -51,7 +51,7 @@ export const getTop = async (
   status: "all" | "ongoing" | "completed"
 ) => {
   const response = await axios.get(
-    `${baseUrl}/top/${type}&page=${page}&status=${status}`
+    `${baseUrl}/top/${type}?page=${page}&status=${status}`
   );
 
   return response.data;
