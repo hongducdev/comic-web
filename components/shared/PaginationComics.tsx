@@ -10,19 +10,27 @@ import {
 
 interface PaginationComicsProps {
   total_pages: number;
-  items_per_page: number;
+  pages_displayed: number; // Số lượng trang hiển thị
   current_page: number;
   onPageChange: (page: number) => void;
 }
 
 const PaginationComics: React.FC<PaginationComicsProps> = ({
   total_pages,
-  items_per_page,
+  pages_displayed,
   current_page,
   onPageChange,
 }) => {
-  let pages = [];
-  for (let i = 1; i <= Math.ceil(total_pages / items_per_page); i++) {
+  const half = Math.floor(pages_displayed / 2);
+  let start = Math.max(current_page - half, 1);
+  let end = Math.min(start + pages_displayed - 1, total_pages);
+
+  if (total_pages - end < half) {
+    start = Math.max(total_pages - pages_displayed + 1, 1);
+  }
+
+  const pages = [];
+  for (let i = start; i <= end; i++) {
     pages.push(i);
   }
 
@@ -31,7 +39,7 @@ const PaginationComics: React.FC<PaginationComicsProps> = ({
       <PaginationContent>
         <PaginationPrevious
           isActive={current_page !== 1}
-          onClick={() => onPageChange(current_page - 1)}
+          onClick={() => onPageChange(Math.max(current_page - 1, 1))}
         >
           Previous
         </PaginationPrevious>
@@ -47,7 +55,7 @@ const PaginationComics: React.FC<PaginationComicsProps> = ({
         ))}
         <PaginationNext
           isActive={current_page !== total_pages}
-          onClick={() => onPageChange(current_page + 1)}
+          onClick={() => onPageChange(Math.min(current_page + 1, total_pages))}
         >
           Next
         </PaginationNext>
@@ -57,3 +65,4 @@ const PaginationComics: React.FC<PaginationComicsProps> = ({
 };
 
 export default PaginationComics;
+

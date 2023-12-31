@@ -76,7 +76,7 @@ const TopPage = () => {
       <div className="my-5">
         <PaginationComics
           total_pages={comics.total_pages}
-          items_per_page={50}
+          pages_displayed={5}
           current_page={comics.current_page}
           onPageChange={(page) => setCurrentPage(page)}
         />
