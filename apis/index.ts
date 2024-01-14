@@ -25,10 +25,7 @@ export const getRecentUpdates = async (
   return response.data;
 };
 
-export const getNewComics = async (
-  page: number,
-  status: "all" | "ongoing" | "completed"
-) => {
+export const getNewComics = async (page: number, status: string) => {
   const response = await axios.get(
     `${baseUrl}/new-comics?page=${page}&status=${status}`
   );

@@ -35,6 +35,7 @@ const TopPage = async ({ searchParams }: Props) => {
 
   return (
     <section className="flex flex-col gap-5">
+      <h1 className="font-bold text-4xl text-emerald-500">Truyện hàng đầu</h1>
       <TypeTop />
       <StatusComicSelect />
       <Suspense fallback={<SkeletonComicList />}>

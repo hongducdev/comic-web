@@ -22,6 +22,6 @@ export const topComic: TopComic[] = [
   },
   {
     id: "follow",
-    name: "Đầu đầu theo dõi"
+    name: "Đứng đầu theo dõi"
   }
 ]
