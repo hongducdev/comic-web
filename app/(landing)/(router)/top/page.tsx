@@ -1,11 +1,13 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Metadata } from "next";
 import { getTop } from "@/apis";
+import { Comic } from "@/types/comic";
 import { topComic } from "@/utils/topComic";
-import PaginationComics from "@/components/shared/PaginationComics";
 import StatusComicSelect from "@/components/shared/StatusComicSelect";
 import ComicCard from "@/components/shared/ComicCard";
-import { Comic } from "@/types/comic";
+import SkeletonComicList from "@/components/shared/SkeletonComicList";
+import Pagination from "@/components/shared/Pagination";
+import TypeTop from "@/components/TypeTop";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -33,15 +35,16 @@ const TopPage = async ({ searchParams }: Props) => {
 
   return (
     <section className="flex flex-col gap-5">
+      <TypeTop />
       <StatusComicSelect />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<SkeletonComicList />}>
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 lg:gap-5">
           {data.comics.map((comic: Comic) => (
             <ComicCard key={comic.id} comic={comic} />
           ))}
         </div>
       </Suspense>
-      <PaginationComics
+      <Pagination
         total_pages={data.total_pages}
         pages_displayed={5}
         current_page={data.current_page}

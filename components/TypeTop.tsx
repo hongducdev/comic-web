@@ -1,11 +1,10 @@
 "use client";
-import { statusComic } from "@/utils/statusComic";
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import React from "react";
 
-const StatusComicSelect = () => {
-  const pathName = usePathname();
+import { topComic } from "@/utils/topComic";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+
+const TypeTop = () => {
   const searchParams = useSearchParams();
   const tab = searchParams.has("tab") ? searchParams.get("tab") : "daily";
   const filter = searchParams.has("filter")
@@ -14,25 +13,25 @@ const StatusComicSelect = () => {
   const page = searchParams.has("page") ? searchParams.get("page") : "1";
 
   return (
-    <div className="flex items-center gap-3">
-      {statusComic.map((status) => (
+    <section className="flex items-center gap-3">
+      {topComic.map((item) => (
         <Link
           className={`px-2 py-0.5 rounded-full text-sm cursor-pointer ${
-            status.id === filter
+            item.id === tab
               ? "bg-emerald-100 text-emerald-500 dark:bg-emerald-800 dark:text-emerald-400"
               : "bg-neutral-100 dark:bg-neutral-800"
           }`}
-          key={status.id}
+          key={item.id}
           href={{
-            pathname: pathName,
-            search: `?tab=${tab}&filter=${status.id}&page=${page}`,
+            pathname: "/top",
+            search: `?tab=${item.id}&filter=${filter}&page=${page}`,
           }}
         >
-          {status.name}
+          {item.name}
         </Link>
       ))}
-    </div>
+    </section>
   );
 };
 
-export default StatusComicSelect;
+export default TypeTop;
