@@ -6,22 +6,22 @@ export interface TopComic {
 export const topComic: TopComic[] = [
   {
     id: "daily",
-    name: "Ngày"
+    name: " Đứng đầu ngày"
   },
   {
     id: "weekly",
-    name: "Tuần"
+    name: "Đứng đầu tuần"
   },
   {
     id: "monthly",
-    name: "Tháng"
+    name: "Đứng đầu tháng"
   },
   {
     id: "chapter",
-    name: "Chương"
+    name: "Đứng đầu chương"
   },
   {
     id: "follow",
-    name: "Theo dõi"
+    name: "Đầu đầu theo dõi"
   }
 ]

@@ -25,7 +25,7 @@ export const generateMetadata = async ({
   const chapter = await getChapterDetail(comic_id, chapter_id);
 
   return {
-    title: chapter.chapter_name,
+    title: `${chapter.chapter_name} - ${chapter.comic_name}`,
     description: chapter.comic_name,
     openGraph: {
       title: chapter.chapter_name,
@@ -74,7 +74,10 @@ const ChapterPage = async ({ params }: Props) => {
       </div>
       <div className="mx-auto my-5">
         {chapterData.images.map((image: ImageChapter) => (
-          <div key={image.page} className="relative w-full h-full">
+          <div
+            key={image.page}
+            className="relative w-full lg:w-[70%] h-full mx-auto"
+          >
             <FallbackImage
               src={image.src}
               backupSrc={image.backup_src}

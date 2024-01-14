@@ -34,7 +34,7 @@ export const getNewComics = async (
   );
 
   return response.data;
-}
+};
 
 export const getListComic = async (
   type: "trending-comics" | "boy-comics" | "girl-comics" | "completed-comics",
@@ -45,11 +45,7 @@ export const getListComic = async (
   return response.data;
 };
 
-export const getTop = async (
-  type: "daily" | "weekly" | "monthly" | "chapter" | "follow",
-  page: number,
-  status: "all" | "ongoing" | "completed"
-) => {
+export const getTop = async (type: string, page: number, status: string) => {
   const response = await axios.get(
     `${baseUrl}/top/${type}?page=${page}&status=${status}`
   );

@@ -1,26 +1,31 @@
+"use client";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface PaginationComicsProps {
   total_pages: number;
-  pages_displayed: number; // Số lượng trang hiển thị
+  pages_displayed: number;
   current_page: number;
-  onPageChange: (page: number) => void;
 }
 
 const PaginationComics: React.FC<PaginationComicsProps> = ({
   total_pages,
   pages_displayed,
   current_page,
-  onPageChange,
 }) => {
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const tab = searchParams.has("tab") ? searchParams.get("tab") : "daily";
+  const filter = searchParams.has("filter") ? searchParams.get("filter") : "all";
+  const path = `${pathName}?tab=${tab}&filter=${filter}&page=`;
+
   const half = Math.floor(pages_displayed / 2);
   let start = Math.max(current_page - half, 1);
   let end = Math.min(start + pages_displayed - 1, total_pages);
@@ -39,7 +44,7 @@ const PaginationComics: React.FC<PaginationComicsProps> = ({
       <PaginationContent>
         <PaginationPrevious
           isActive={current_page !== 1}
-          onClick={() => onPageChange(Math.max(current_page - 1, 1))}
+          href={`${path}${current_page - 1}`}
         >
           Previous
         </PaginationPrevious>
@@ -47,7 +52,7 @@ const PaginationComics: React.FC<PaginationComicsProps> = ({
           <PaginationItem key={page}>
             <PaginationLink
               isActive={page === current_page}
-              onClick={() => onPageChange(page)}
+              href={`${path}${page}`}
             >
               {page}
             </PaginationLink>
@@ -55,7 +60,7 @@ const PaginationComics: React.FC<PaginationComicsProps> = ({
         ))}
         <PaginationNext
           isActive={current_page !== total_pages}
-          onClick={() => onPageChange(Math.min(current_page + 1, total_pages))}
+          href={`${path}${current_page + 1}`}
         >
           Next
         </PaginationNext>
@@ -65,4 +70,3 @@ const PaginationComics: React.FC<PaginationComicsProps> = ({
 };
 
 export default PaginationComics;
-
