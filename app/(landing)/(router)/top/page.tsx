@@ -1,13 +1,12 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { getTop } from "@/apis";
-import { Comic } from "@/types/comic";
 import { topComic } from "@/utils/topComic";
 import StatusComicSelect from "@/components/shared/StatusComicSelect";
-import ComicCard from "@/components/shared/ComicCard";
 import SkeletonComicList from "@/components/shared/SkeletonComicList";
 import Pagination from "@/components/shared/Pagination";
 import TypeTop from "@/components/TypeTop";
+import ComicList from "@/components/shared/ComicList";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -21,7 +20,7 @@ export async function generateMetadata({
 
   // return metadata
   return {
-    title: `${topComic.find((item) => item.id === tab)?.name} - Trang ${page}`,
+    title: `${topComic.find((item) => item.id === tab)?.name} - Trang ${page} | HDD Comics`,
   };
 }
 
@@ -39,11 +38,7 @@ const TopPage = async ({ searchParams }: Props) => {
       <TypeTop />
       <StatusComicSelect />
       <Suspense fallback={<SkeletonComicList />}>
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 lg:gap-5">
-          {data.comics.map((comic: Comic) => (
-            <ComicCard key={comic.id} comic={comic} />
-          ))}
-        </div>
+        <ComicList comicData={data.comics} />
       </Suspense>
       <Pagination
         total_pages={data.total_pages}

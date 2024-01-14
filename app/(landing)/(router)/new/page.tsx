@@ -18,7 +18,7 @@ export async function generateMetadata({
 
   // return metadata
   return {
-    title: `Truyện mới - Trang ${page}`,
+    title: `Truyện mới - Trang ${page} | HDD Comics`,
   };
 }
 

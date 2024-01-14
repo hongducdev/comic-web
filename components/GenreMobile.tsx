@@ -15,18 +15,15 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 import { Genre } from "@/types/comic";
+import Link from "next/link";
 
 interface GenreMobileProps {
   genres: Genre[];
-  selectedGenre: string;
-  setSelectedGenre: React.Dispatch<React.SetStateAction<string>>;
+  tab?: string | null;
+  filter?: string | null;
 }
 
-const GenreMobile: React.FC<GenreMobileProps> = ({
-  genres,
-  selectedGenre,
-  setSelectedGenre,
-}) => {
+const GenreMobile: React.FC<GenreMobileProps> = ({ genres, tab, filter }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -39,7 +36,7 @@ const GenreMobile: React.FC<GenreMobileProps> = ({
             aria-expanded={open}
             className="w-full justify-between"
           >
-            {genres.find((genre) => genre.id === selectedGenre)?.name}
+            {genres.find((genre) => genre.id === tab)?.name}
             <RiContractUpDownLine className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -52,18 +49,22 @@ const GenreMobile: React.FC<GenreMobileProps> = ({
                 <CommandItem
                   key={genre.id}
                   value={genre.id}
-                  onSelect={(currentValue) => {
-                    setSelectedGenre(
-                      currentValue === selectedGenre ? "" : currentValue
-                    );
+                  onSelect={() => {
                     setOpen(false);
                   }}
                 >
-                  {genre.name}
+                  <Link
+                    href={{
+                      pathname: "/genres",
+                      search: `?tab=${genre.id}&filter=${filter}`,
+                    }}
+                  >
+                    {genre.name}
+                  </Link>
                   <RiSearch2Line
                     className={cn(
                       "ml-auto h-4 w-4",
-                      selectedGenre === genre.id ? "opacity-100" : "opacity-0"
+                      tab === genre.id ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

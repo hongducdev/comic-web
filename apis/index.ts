@@ -82,7 +82,7 @@ export const getGenres = async () => {
 export const getComicByGenre = async (
   genre_id: string,
   page: number,
-  status: "all" | "ongoing" | "completed"
+  status: string
 ) => {
   const response = await axios.get(
     `${baseUrl}/genres/${genre_id}?page=${page}&status=${status}`
