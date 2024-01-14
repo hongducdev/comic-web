@@ -33,10 +33,7 @@ export const getNewComics = async (page: number, status: string) => {
   return response.data;
 };
 
-export const getListComic = async (
-  type: "trending-comics" | "boy-comics" | "girl-comics" | "completed-comics",
-  page: number
-) => {
+export const getListComic = async (type: string, page: number) => {
   const response = await axios.get(`${baseUrl}/${type}?page=${page}`);
 
   return response.data;

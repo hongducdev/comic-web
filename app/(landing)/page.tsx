@@ -1,80 +1,71 @@
-"use client";
-import { useEffect, useState } from "react";
 import { getListComic } from "@/apis";
 import ComicList from "@/components/shared/ComicList";
-import { Comic } from "@/types/comic";
+import SkeletonComicList from "@/components/shared/SkeletonComicList";
+import { Suspense } from "react";
 
-const HomePage = () => {
-  const [popularComics, setPopularComics] = useState<Comic[]>([]);
-  const [completedComics, setCompletedComics] = useState<Comic[]>([]);
-  const [boyComics, setBoyComics] = useState<Comic[]>([]);
-  const [girlComics, setGirlComics] = useState<Comic[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+const fetchListComic = async ({
+  type,
+  page,
+}: {
+  type: string;
+  page: number;
+}) => {
+  try {
+    const response = await getListComic(type, page);
+    if (response.comics) {
+      return response.comics;
+    } else {
+      throw new Error(`Failed to fetch comics: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Error fetching comics:", error);
+    throw error; // Re-throw to handle higher up
+  }
+};
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    const fetchComics = (category: string) => {
-      return getListComic(
-        category as
-          | "trending-comics"
-          | "boy-comics"
-          | "girl-comics"
-          | "completed-comics",
-        1
-      );
-    };
-
-    Promise.all([
-      fetchComics("trending-comics").then((response) =>
-        setPopularComics(response.comics)
-      ),
-      fetchComics("completed-comics").then((response) =>
-        setCompletedComics(response.comics)
-      ),
-      fetchComics("boy-comics").then((response) =>
-        setBoyComics(response.comics)
-      ),
-      fetchComics("girl-comics").then((response) =>
-        setGirlComics(response.comics)
-      ),
-    ])
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch comics:", error);
-        // Handle errors as needed
-        setIsLoading(false);
-      });
-  }, []);
+const HomePage = async () => {
+  const [popularComics, completedComics, boyComics, girlComics] =
+    await Promise.all([
+      fetchListComic({ type: "trending-comics", page: 1 }),
+      fetchListComic({ type: "completed-comics", page: 1 }),
+      fetchListComic({ type: "boy-comics", page: 1 }),
+      fetchListComic({ type: "girl-comics", page: 1 }),
+    ]);
 
   return (
-    <section className="">
-      <ComicList
-        name="Đang phổ biến"
-        url="/trending-comics"
-        comicData={popularComics}
-        loading={isLoading}
-      />
-      <ComicList
-        name="Đã hoàn thành"
-        url="/completed-comics"
-        comicData={completedComics}
-        loading={isLoading}
-      />
-      <ComicList
-        name="Dành cho nam"
-        url="/boy-comics"
-        comicData={boyComics}
-        loading={isLoading}
-      />
-      <ComicList
-        name="Dành cho nữ"
-        url="/girl-comics"
-        comicData={girlComics}
-        loading={isLoading}
-      />
+    <section className="flex flex-col gap-5">
+      <Suspense fallback={<SkeletonComicList />}>
+        <ComicList
+          name="Truyện thịnh hành"
+          url="/category/trending-comics"
+          comicData={popularComics}
+          limit={10}
+        />
+      </Suspense>
+      <Suspense fallback={<SkeletonComicList />}>
+        <ComicList
+          name="Truyện hoàn thành"
+          url="/category/completed-comics"
+          comicData={completedComics}
+          limit={10}
+        />
+      </Suspense>
+      <Suspense fallback={<SkeletonComicList />}>
+        <ComicList
+          name="Truyện con trai"
+          url="/category/boy-comics"
+          comicData={boyComics}
+          limit={10}
+        />
+      </Suspense>
+      <Suspense fallback={<SkeletonComicList />}>
+        <ComicList
+          name="Truyện con trai"
+          url="/category/girl-comics"
+          comicData={girlComics}
+          limit={10}
+        />
+      </Suspense>
     </section>
   );
 };

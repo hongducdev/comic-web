@@ -36,7 +36,6 @@ const getComic = async ({ params }: Props) => {
   const comic_id = params.slug;
   const response = await getDetailComic(comic_id);
   if (response.status === 500) {
-    
   }
   return response;
 };
@@ -61,7 +60,7 @@ const DetailComicPage = async ({ params }: Props) => {
           <div className="flex flex-wrap items-center gap-3">
             {comicData.genres.map((genre: Genre) => (
               <Link
-                href={`/genre/${genre.id}`}
+                href={`/genres?tab=${genre.id}`}
                 key={genre.id}
                 className="border border-gray-300 dark:border-gray-700 rounded-md p-3 hover:bg-emerald-100 dark:hover:bg-emerald-700 hover:border-emerald-400 transition-colors px-2 py-1"
               >
