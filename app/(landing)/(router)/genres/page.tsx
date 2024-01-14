@@ -12,7 +12,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export const getGenresComic = async () => {
+const getGenresComic = async () => {
   const genres = await getGenres();
 
   return genres;
