@@ -1,4 +1,5 @@
 import { getChapterDetail } from "@/apis";
+import ChapterController from "@/components/shared/ChapterController";
 import FallbackImage from "@/components/shared/FallbackImage";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -49,20 +50,6 @@ const ChapterPage = async ({ params }: Props) => {
     params: { slug: params.slug, id: chapter_id },
   });
 
-  const handleChangeChapter = (direction: "prev" | "next") => {
-    const chapterList = [...chapterData.chapters].reverse();
-    const chapterIdx = chapterList.findIndex(
-      (chapter: any) => chapter.id === Number(chapter_id)
-    );
-    const nextChapterIdx = chapterIdx + (direction === "next" ? 1 : -1);
-
-    if (nextChapterIdx < 0 || nextChapterIdx >= chapterList.length) {
-      return chapter_id;
-    } else {
-      return chapterList[nextChapterIdx].id;
-    }
-  };
-
   return (
     <section className="relative">
       <div className="flex items-center gap-3 lg:text-xl">
@@ -90,31 +77,7 @@ const ChapterPage = async ({ params }: Props) => {
           </div>
         ))}
       </div>
-      <div className="fixed bottom-0 left-0 w-full bg-black bg-opacity-65 py-2 flex items-center justify-center gap-5">
-        <Link
-          href={`/comic/${params.slug}/${handleChangeChapter("prev")}`}
-          className={`px-3 py-1 rounded-full text-sm ${
-            handleChangeChapter("prev") === chapter_id
-              ? "bg-neutral-500 cursor-not-allowed"
-              : "bg-emerald-100 text-emerald-500"
-          }`}
-        >
-          Chương trước
-        </Link>
-        <Link
-          href={`/comic/${params.slug}/${handleChangeChapter("next")}`}
-          className={`px-3 py-1 rounded-full text-sm ${
-            handleChangeChapter("next") === chapter_id
-              ? "bg-neutral-500 cursor-not-allowed"
-              : "bg-emerald-100 text-emerald-500"
-          }`}
-        >
-          Chương sau
-        </Link>
-        <button className="px-3 py-1 rounded-full text-sm">
-          Tất cả chương
-        </button>
-      </div>
+      <ChapterController chapterData={chapterData} params={params} />
     </section>
   );
 };
