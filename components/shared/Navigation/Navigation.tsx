@@ -76,7 +76,7 @@ const Navigation = () => {
       </div>
 
       {isOpen && (
-        <div className="fixed bg-neutral-100 dark:bg-neutral-900 min-h-screen w-[90vw] top-0 right-0 p-3 z-20">
+        <div className="fixed bg-neutral-100 dark:bg-neutral-900 min-h-screen w-screen top-0 right-0 p-3 z-20">
           <div
             className="flex items-end justify-end"
             onClick={toggleMobileMenu}

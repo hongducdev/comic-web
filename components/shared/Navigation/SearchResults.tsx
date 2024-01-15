@@ -13,7 +13,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   onClose,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (

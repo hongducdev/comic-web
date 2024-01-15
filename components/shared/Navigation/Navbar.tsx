@@ -1,4 +1,5 @@
 "use client";
+import { useMobileMenuStore } from "@/stores/mobileMenu-store";
 import { NavbarLinks } from "@/utils/navbar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -6,7 +7,7 @@ import React from "react";
 
 const Navbar = () => {
   const pathname = usePathname();
-
+  const { isOpen, onClose } = useMobileMenuStore();
   return (
     <nav className="">
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5">
@@ -17,8 +18,15 @@ const Navbar = () => {
             } text-nowrap`}
             key={link.path}
           >
-            <Link href={link.path}>
-              <span className="">{link.label}</span>
+            <Link
+              href={link.path}
+              onClick={() => {
+                if (isOpen) {
+                  onClose();
+                }
+              }}
+            >
+              <span>{link.label}</span>
             </Link>
           </div>
         ))}
