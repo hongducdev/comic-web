@@ -15,7 +15,7 @@ const Footer = () => {
           </Link>
         </div>
       </div>
-      <p className="pt-5">© 2024 HDDComic™. All rights reserved.</p>
+      <p className="pt-5">© 2024 HDDComic™. Mọi quyền được bảo lưu.</p>
     </section>
   );
 };
