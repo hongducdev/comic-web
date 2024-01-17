@@ -19,7 +19,7 @@ const ScrollToTop = () => {
 
   return (
     showButton && (
-      <button className="fixed bottom-10 right-10 bg-neutral-800 w-16 h-16 flex items-center justify-center rounded-full z-30" onClick={scrollToTop}>
+      <button className="fixed bottom-10 right-10 bg-neutral-200 dark:bg-neutral-800 w-16 h-16 flex items-center justify-center rounded-full z-30" onClick={scrollToTop}>
         <ChevronsUp size={36} />
       </button>
     )
