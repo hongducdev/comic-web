@@ -3,34 +3,29 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 interface FallbackImageProps {
-  src: string;
-  backupSrc?: string;
+  backupSrc: string;
   [rest: string]: any;
 }
 
 const FallbackImageChapter: React.FC<FallbackImageProps> = ({
-  src,
   backupSrc,
   ...rest
 }) => {
-  const [imgSrc, setImgSrc] = useState(src);
+  const [imgBackSrc, setImgBackSrc] = useState(backupSrc);
 
   useEffect(() => {
-    setImgSrc(src);
-  }, [src]);
+    setImgBackSrc(backupSrc);
+  }, [backupSrc]);
 
   return (
     <Image
-      src={
-        imgSrc ? imgSrc : backupSrc ? backupSrc : "/images/default_image.jpg"
-      }
-      alt=""
-      loading="lazy"
+      src={imgBackSrc ? imgBackSrc : "/images/default_image.jpg"}
+      alt="Comic image"
+      placeholder="blur"
+      blurDataURL="/images/default_image.jpg"
       priority
       {...rest}
-      onError={() =>
-        setImgSrc(backupSrc ? backupSrc : "/images/default_image.jpg")
-      }
+      onError={() => setImgBackSrc("/images/default_image.jpg")}
     />
   );
 };

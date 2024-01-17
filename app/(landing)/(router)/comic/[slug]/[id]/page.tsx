@@ -1,8 +1,11 @@
 import { getChapterDetail } from "@/apis";
 import ChapterController from "@/components/shared/ChapterController";
 import FallbackImage from "@/components/shared/FallbackImage";
+import FallbackImageChapter from "@/components/shared/FallbackImageChapter";
+import Loading from "@/components/shared/Loading";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 
 type Props = {
@@ -65,15 +68,17 @@ const ChapterPage = async ({ params }: Props) => {
             key={image.page}
             className="relative w-full lg:w-[70%] h-full mx-auto"
           >
-            <FallbackImage
-              src={image.src}
-              backupSrc={image.backup_src}
-              alt=""
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{ width: "100%", height: "auto" }}
-            />
+            <Suspense fallback={<Loading />}>
+              <FallbackImageChapter
+                src={image.src}
+                backupSrc={image.backup_src}
+                alt=""
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </Suspense>
           </div>
         ))}
       </div>
