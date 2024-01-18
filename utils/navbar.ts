@@ -20,4 +20,8 @@ export const NavbarLinks: NavbarLink[] = [
     label: "Hàng đầu",
     path: "/top",
   },
+  {
+    label: "Lịch sử",
+    path: "/history",
+  }
 ];
